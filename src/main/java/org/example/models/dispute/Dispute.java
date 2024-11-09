@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Dispute {
 
-    private String id;
+    private long id;
 
     private DisputeReason disputeReason;
 
@@ -22,8 +22,6 @@ public class Dispute {
     private long createdAt;
 
     private long updatedAt;
-
-    private long closedAt;
 
     private long resolvedAt;
 

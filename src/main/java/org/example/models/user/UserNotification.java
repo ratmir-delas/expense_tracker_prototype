@@ -7,25 +7,27 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.models.tracker.ActionType;
 
 @Entity
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DailyLimit {
+public class UserNotification {
 
     @Id
     private long id;
 
-    private ActionType actionType;
+    @ManyToOne
+    private User user;
 
-    private int limit;
+    private long userId;
 
     @ManyToOne
-    private Tier tier;
+    private Notification notification;
 
-    private long tierId;
+    private long notificationId;
+
+    private boolean isRead;
 
 }

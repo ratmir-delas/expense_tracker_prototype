@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="0fa3491b-bd4f-40f5-8cb3-3f0030b0f98f" name="expense_tracker_prototype_db@localhost Mapping">
+      <data-sources db="b061fda3-6e74-4302-80ad-bd6a96ae6594" />
+      <scope>
+        <node kind="schema" qname="expense_tracker_prototype_db" />
+      </scope>
+    </mapping>
+  </component>
+</project>

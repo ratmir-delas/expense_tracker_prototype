@@ -1,8 +1,13 @@
 package org.example.models.tracker;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.*;
 import org.example.models.user.User;
 
+@Entity
 @Data
 @Builder
 @NoArgsConstructor
@@ -10,6 +15,7 @@ import org.example.models.user.User;
 @ToString
 public class Expense {
 
+    @Id
     private long id;
 
     private double amount;
@@ -18,60 +24,26 @@ public class Expense {
 
     private String description;
 
+    @Enumerated
     private ExpenseCategory expenseCategory;
 
-    // foreign key
-    private long budgetId;
-
+    @ManyToOne
     private Budget budget;
 
-    // foreign key
-    private long createdById;
+    private long budgetId;
 
-    private User createdBy;
-
-    private long createdAt;
-
-    // foreign key
-    private long updatedById;
-
+    @ManyToOne
     private User updatedBy;
+
+    private long updatedById;
 
     private long updatedAt;
 
-    // lazy loading
+    @ManyToOne
+    private User createdBy;
 
-    private void loadBudget() {
+    private long createdById;
 
-    }
-
-    private void loadCreatedBy() {
-
-    }
-
-    private void loadUpdatedBy() {
-
-    }
-
-    public Budget getBudget() {
-        if (budget == null) {
-            loadBudget();
-        }
-        return budget;
-    }
-
-    public User getCreatedBy() {
-        if (createdBy == null) {
-            loadCreatedBy();
-        }
-        return createdBy;
-    }
-
-    public User getUpdatedBy() {
-        if (updatedBy == null) {
-            loadUpdatedBy();
-        }
-        return updatedBy;
-    }
+    private long createdAt;
 
 }

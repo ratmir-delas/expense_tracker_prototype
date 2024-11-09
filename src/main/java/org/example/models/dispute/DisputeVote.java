@@ -4,11 +4,12 @@ public class DisputeVote {
 
     private long id;
 
-    private long disputeId;
-
-    private long userId;
-
     private boolean vote;
 
+    private long disputeId;
+
     private long createdAt;
+
+    private long createdBy;
+
 }
