@@ -1,8 +1,6 @@
 package org.example.models.user;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,18 +14,20 @@ import lombok.NoArgsConstructor;
 public class TierHistory {
 
     @Id
-    private long id;
+    @GeneratedValue
+    private Long id;
 
     @ManyToOne
     private User user;
 
-    private long userId;
-
     @ManyToOne
     private Tier tier;
 
-    private long tierId;
-
     private long createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = System.currentTimeMillis();
+    }
 
 }

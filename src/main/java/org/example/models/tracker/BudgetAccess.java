@@ -1,9 +1,6 @@
 package org.example.models.tracker;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.*;
 import org.example.models.user.User;
 
@@ -16,24 +13,23 @@ import org.example.models.user.User;
 public class BudgetAccess {
 
     @Id
-    private long budgetId;
-
-    @ManyToOne
-    private Budget budget;
+//    @Column(name = "budget_id")
+    private Long budgetId;
 
     @Id
-    private long userId;
-
-    @ManyToOne
-    private User user;
+//    @Column(name = "user_id")
+    private Long userId;
 
     private BudgetAccessLevel accessLevel;
 
     @ManyToOne
     private User createdBy;
 
-    private long createdById;
-
     private long createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = System.currentTimeMillis();
+    }
 
 }

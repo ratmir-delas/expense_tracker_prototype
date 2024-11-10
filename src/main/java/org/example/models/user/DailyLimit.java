@@ -1,6 +1,7 @@
 package org.example.models.user;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
@@ -17,7 +18,8 @@ import org.example.models.tracker.ActionType;
 public class DailyLimit {
 
     @Id
-    private long id;
+    @GeneratedValue
+    private Long id;
 
     private ActionType actionType;
 
@@ -25,7 +27,5 @@ public class DailyLimit {
 
     @ManyToOne
     private Tier tier;
-
-    private long tierId;
 
 }

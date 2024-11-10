@@ -1,9 +1,6 @@
 package org.example.models.tracker;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.*;
 import org.example.models.user.User;
 
@@ -18,7 +15,7 @@ import java.util.List;
 public class Budget {
 
     @Id
-    private long id;
+    private Long id;
 
     private String name;
 
@@ -29,16 +26,17 @@ public class Budget {
     @ManyToOne
     private User createdBy;
 
-    private long createdById;
-
     private long createdAt;
 
     @ManyToOne
     private User updatedBy;
 
-    private long updatedById;
-
     private long updatedAt;
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = System.currentTimeMillis();
+    }
 
     @OneToMany
     private List<BudgetAccess> participants;

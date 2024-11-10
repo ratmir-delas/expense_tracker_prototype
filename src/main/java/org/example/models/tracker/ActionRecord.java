@@ -3,6 +3,7 @@ package org.example.models.tracker;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,7 +18,7 @@ import org.example.models.user.User;
 public class ActionRecord {
 
     @Id
-    private long id;
+    private Long id;
 
     private ActionType actionType;
 
@@ -26,18 +27,17 @@ public class ActionRecord {
     @ManyToOne
     private Budget budget;
 
-    private long budgetId;
-
     @ManyToOne
     private Expense expense;
-
-    private long expenseId;
 
     @ManyToOne
     private User createdBy;
 
-    private long createdById;
-
     private long createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = System.currentTimeMillis();
+    }
 
 }

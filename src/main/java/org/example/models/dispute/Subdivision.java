@@ -1,28 +1,39 @@
 package org.example.models.dispute;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.models.tracker.Expense;
+import org.example.models.user.User;
 
+@Entity
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Subdivision {
 
-    private long id;
+    @Id
+    private Long id;
 
     private double amount;
 
     private double percentage;
 
-    private long expenseId;
+    @ManyToOne
+    private Expense expense;
 
-    private long disputeId;
+    @ManyToOne
+    private Dispute dispute;
 
-    private long userId;
+    @ManyToOne
+    private User user;
 
-    private long createdById;
+    @ManyToOne
+    private User createdBy;
 
 }

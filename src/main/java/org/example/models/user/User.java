@@ -1,14 +1,15 @@
 package org.example.models.user;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "_user")
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "user_type")
 @Data
 @Builder
 @NoArgsConstructor
@@ -16,7 +17,8 @@ import lombok.NoArgsConstructor;
 public class User {
 
     @Id
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String name;
 
@@ -29,8 +31,13 @@ public class User {
     @ManyToOne
     private Tier tier;
 
-    private long tierId;
-
     private long createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        // set default tier
+        this.isActive = true;
+        this.createdAt = System.currentTimeMillis();
+    }
 
 }

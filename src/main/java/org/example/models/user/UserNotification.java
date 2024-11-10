@@ -1,8 +1,6 @@
 package org.example.models.user;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,17 +14,14 @@ import lombok.NoArgsConstructor;
 public class UserNotification {
 
     @Id
-    private long id;
+    @GeneratedValue
+    private Long id;
 
     @ManyToOne
     private User user;
 
-    private long userId;
-
     @ManyToOne
     private Notification notification;
-
-    private long notificationId;
 
     private boolean isRead;
 

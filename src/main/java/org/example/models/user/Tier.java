@@ -1,6 +1,7 @@
 package org.example.models.user;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,7 +16,8 @@ import lombok.NoArgsConstructor;
 public class Tier {
 
     @Id
-    private long id;
+    @GeneratedValue
+    private Long id;
 
     private String name;
 

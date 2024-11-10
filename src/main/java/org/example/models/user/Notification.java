@@ -1,8 +1,6 @@
 package org.example.models.user;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,7 +15,8 @@ import org.example.models.tracker.BudgetAlert;
 public class Notification {
 
     @Id
-    private long id;
+    @GeneratedValue
+    private Long id;
 
     private String title;
 
@@ -26,8 +25,11 @@ public class Notification {
     @ManyToOne
     private BudgetAlert budgetAlert;
 
-    private long budgetAlertId;
-
     private long createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = System.currentTimeMillis();
+    }
 
 }
