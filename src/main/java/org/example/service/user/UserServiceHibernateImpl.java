@@ -17,25 +17,29 @@ public class UserServiceHibernateImpl implements UserService {
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Override
-    public boolean register(String name, String email, String password) {
+    public User register(String name, String email, String password) {
         User user = User.builder()
                 .name(name)
                 .email(email)
                 .password(passwordEncoder.encode(password))
                 .build();
-
-        if (userRepository.existsByEmail(email)) {
-            return false;
-        } else {
-            userRepository.save(user);
-            return true;
-        }
+        return userRepository.save(user);
     }
 
     @Override
     public boolean login(String email, String password) {
         Optional<User> userOptional = userRepository.findByEmail(email);
         return userOptional.isPresent() && passwordEncoder.matches(password, userOptional.get().getPassword());
+    }
+
+    @Override
+    public Optional<User> getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public Optional<User> getUserById(Long id) {
+        return userRepository.findById(id);
     }
 
     @Override

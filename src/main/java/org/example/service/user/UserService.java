@@ -3,11 +3,17 @@ package org.example.service.user;
 import org.example.models.user.Tier;
 import org.example.models.user.User;
 
+import java.util.Optional;
+
 public interface UserService {
 
-    boolean register(String name, String email, String password);
+    User register(String name, String email, String password);
 
     boolean login(String email, String password);
+
+    Optional<User> getUserByEmail(String email);
+
+    Optional<User> getUserById(Long id);
 
     boolean changePassword(String email, String oldPassword, String newPassword);
 

@@ -5,6 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.models.tracker.BudgetAccess;
+import org.example.models.tracker.Expense;
+
+import java.util.List;
 
 @Entity
 @Table(name = "_user")

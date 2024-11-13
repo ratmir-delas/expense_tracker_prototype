@@ -3,9 +3,9 @@ package org.example.models.tracker;
 import jakarta.persistence.*;
 import lombok.*;
 import org.example.models.user.User;
+import org.example.util.UserSession;
 
 @Entity
-@IdClass(BudgetAccessPK.class)
 @Data
 @Builder
 @NoArgsConstructor
@@ -13,14 +13,16 @@ import org.example.models.user.User;
 public class BudgetAccess {
 
     @Id
-//    @Column(name = "budget_id")
-    private Long budgetId;
-
-    @Id
-//    @Column(name = "user_id")
-    private Long userId;
+    @GeneratedValue
+    private Long id;
 
     private BudgetAccessLevel accessLevel;
+
+    @ManyToOne
+    private Budget budget;
+
+    @ManyToOne
+    private User user;
 
     @ManyToOne
     private User createdBy;
@@ -30,6 +32,7 @@ public class BudgetAccess {
     @PrePersist
     protected void onCreate() {
         this.createdAt = System.currentTimeMillis();
+        this.createdBy = UserSession.getInstance().getUser();
     }
 
 }

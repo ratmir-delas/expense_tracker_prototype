@@ -3,6 +3,7 @@ package org.example.models.tracker;
 import jakarta.persistence.*;
 import lombok.*;
 import org.example.models.user.User;
+import org.example.util.UserSession;
 
 @Entity
 @Data
@@ -13,6 +14,7 @@ import org.example.models.user.User;
 public class Expense {
 
     @Id
+    @GeneratedValue
     private Long id;
 
     private double amount;
@@ -22,7 +24,7 @@ public class Expense {
     private String description;
 
     @Enumerated
-    private ExpenseCategory expenseCategory;
+    private ExpenseCategory category;
 
     @ManyToOne
     private Budget budget;
@@ -39,12 +41,17 @@ public class Expense {
 
     @PrePersist
     protected void onCreate() {
+        if (this.category == null) {
+            this.category = ExpenseCategory.OTHER;
+        }
         this.createdAt = System.currentTimeMillis();
+        this.createdBy = UserSession.getInstance().getUser();
     }
 
     @PreUpdate
     protected void onUpdate() {
         this.updatedAt = System.currentTimeMillis();
+        this.updatedBy = UserSession.getInstance().getUser();
     }
 
 }

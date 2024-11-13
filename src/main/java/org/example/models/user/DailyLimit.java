@@ -1,9 +1,6 @@
 package org.example.models.user;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,6 +20,7 @@ public class DailyLimit {
 
     private ActionType actionType;
 
+    @Column(name = "`limit`")
     private int limit;
 
     @ManyToOne

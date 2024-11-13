@@ -3,6 +3,7 @@ package org.example.models.tracker;
 import jakarta.persistence.*;
 import lombok.*;
 import org.example.models.user.User;
+import org.example.util.UserSession;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ import java.util.List;
 public class Budget {
 
     @Id
+    @GeneratedValue
     private Long id;
 
     private String name;
@@ -35,10 +37,15 @@ public class Budget {
 
     @PrePersist
     protected void onCreate() {
+        this.amount = 0;
         this.createdAt = System.currentTimeMillis();
+        this.createdBy = UserSession.getInstance().getUser();
     }
 
-    @OneToMany
-    private List<BudgetAccess> participants;
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = System.currentTimeMillis();
+        this.updatedBy = UserSession.getInstance().getUser();
+    }
 
 }
