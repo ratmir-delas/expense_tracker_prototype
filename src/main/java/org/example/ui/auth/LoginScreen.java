@@ -1,7 +1,7 @@
 package org.example.ui.auth;
 
 import org.example.models.user.User;
-import org.example.service.user.UserService;
+import org.example.services.user.UserService;
 import org.example.util.UserSession;
 import org.springframework.context.ApplicationContext;
 

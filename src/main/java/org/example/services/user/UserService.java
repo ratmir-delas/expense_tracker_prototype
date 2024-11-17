@@ -1,4 +1,4 @@
-package org.example.service.user;
+package org.example.services.user;
 
 import org.example.models.user.Tier;
 import org.example.models.user.User;

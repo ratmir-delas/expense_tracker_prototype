@@ -1,26 +1,37 @@
 package org.example.ui.expense;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.util.List;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+
+import org.example.TrackerApplication;
+import org.example.models.tracker.Expense;
+import org.example.services.tracker.ExpenseService;
+import org.example.ui.MainScreen;
+import org.example.util.UserSession;
+import org.springframework.context.ApplicationContext;
 
 public class ExpensesScreen extends JPanel {
 
-    public ExpensesScreen() {
+    private ExpenseList expenseList;
+    private JPanel contentPanel;
+    private List<Expense> expenses;
+    private ExpenseService expenseService;
+
+    public ExpensesScreen(ApplicationContext context, TrackerApplication app) {
+        expenseService = context.getBean(ExpenseService.class);
+        expenses = expenseService.getPersonalExpensesByUserId(UserSession.getInstance().getUser().getId());
         setLayout(new BorderLayout());
 
-        JLabel titleLabel = new JLabel("Expenses", JLabel.CENTER);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 18));
-        add(titleLabel, BorderLayout.NORTH);
-
-        // List of expenses
-        JPanel expenseListPanel = new JPanel(new BorderLayout());
-        JList<String> expensesList = new JList<>(new String[] {"Expense 1", "Expense 2"});
-        JScrollPane scrollPane = new JScrollPane(expensesList);
+        contentPanel = new JPanel(new BorderLayout());
+        expenseList = new ExpenseList(expenses, app::showExpenseForm);
+        contentPanel.add(expenseList, BorderLayout.CENTER);
+        add(contentPanel, BorderLayout.CENTER);
 
         JButton addExpenseButton = new JButton("Add New Expense");
-        expenseListPanel.add(scrollPane, BorderLayout.CENTER);
-        expenseListPanel.add(addExpenseButton, BorderLayout.SOUTH);
+        add(addExpenseButton, BorderLayout.SOUTH);
 
-        add(expenseListPanel, BorderLayout.CENTER);
+        addExpenseButton.addActionListener(e -> app.showExpenseForm(null));
     }
 }

@@ -1,4 +1,4 @@
-package org.example.service.tracker;
+package org.example.services.tracker;
 
 import org.example.models.tracker.BudgetAccess;
 import org.example.models.tracker.BudgetAccessLevel;

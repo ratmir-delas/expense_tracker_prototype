@@ -1,9 +1,9 @@
-package org.example.service.user;
+package org.example.services.user;
 
 import lombok.RequiredArgsConstructor;
 import org.example.models.user.Tier;
 import org.example.models.user.User;
-import org.example.repository.UserRepository;
+import org.example.repositories.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 

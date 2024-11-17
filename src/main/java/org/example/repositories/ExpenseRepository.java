@@ -1,4 +1,4 @@
-package org.example.repository;
+package org.example.repositories;
 
 import org.example.models.tracker.Expense;
 import org.springframework.data.jpa.repository.JpaRepository;

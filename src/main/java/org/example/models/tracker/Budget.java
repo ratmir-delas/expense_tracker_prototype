@@ -23,8 +23,6 @@ public class Budget {
 
     private String description;
 
-    private double amount;
-
     @ManyToOne
     private User createdBy;
 
@@ -37,7 +35,6 @@ public class Budget {
 
     @PrePersist
     protected void onCreate() {
-        this.amount = 0;
         this.createdAt = System.currentTimeMillis();
         this.createdBy = UserSession.getInstance().getUser();
     }

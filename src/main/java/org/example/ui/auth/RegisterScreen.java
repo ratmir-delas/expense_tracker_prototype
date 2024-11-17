@@ -1,14 +1,12 @@
 package org.example.ui.auth;
 
 import org.example.models.user.User;
-import org.example.service.user.UserService;
+import org.example.services.user.UserService;
 import org.example.util.UserSession;
 import org.springframework.context.ApplicationContext;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class RegisterScreen extends JPanel {
 

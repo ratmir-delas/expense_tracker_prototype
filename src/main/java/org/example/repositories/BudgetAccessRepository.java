@@ -1,9 +1,8 @@
-package org.example.repository;
+package org.example.repositories;
 
 import org.example.models.tracker.BudgetAccess;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Collection;
 import java.util.List;
 
 public interface BudgetAccessRepository extends JpaRepository<BudgetAccess, Long> {

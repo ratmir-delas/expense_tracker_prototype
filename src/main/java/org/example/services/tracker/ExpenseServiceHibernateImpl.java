@@ -1,10 +1,10 @@
-package org.example.service.tracker;
+package org.example.services.tracker;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.example.models.tracker.Budget;
 import org.example.models.tracker.Expense;
-import org.example.repository.ExpenseRepository;
+import org.example.repositories.ExpenseRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

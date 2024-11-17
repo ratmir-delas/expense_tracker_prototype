@@ -5,6 +5,8 @@ import lombok.*;
 import org.example.models.user.User;
 import org.example.util.UserSession;
 
+import java.util.Date;
+
 @Entity
 @Data
 @Builder
@@ -17,9 +19,14 @@ public class Expense {
     @GeneratedValue
     private Long id;
 
+    private String title;
+
     private double amount;
 
-    private long dateTime;
+    //private long dateTime;
+
+    @Temporal(TemporalType.DATE)
+    private Date date;
 
     private String description;
 

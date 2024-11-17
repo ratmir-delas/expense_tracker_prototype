@@ -1,4 +1,4 @@
-package org.example.service.tracker;
+package org.example.services.tracker;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -6,7 +6,7 @@ import org.example.models.tracker.Budget;
 import org.example.models.tracker.BudgetAccess;
 import org.example.models.tracker.BudgetAccessLevel;
 import org.example.models.user.User;
-import org.example.repository.BudgetAccessRepository;
+import org.example.repositories.BudgetAccessRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

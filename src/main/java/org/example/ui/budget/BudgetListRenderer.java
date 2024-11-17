@@ -8,36 +8,53 @@ import java.awt.*;
 public class BudgetListRenderer extends JPanel implements ListCellRenderer<Budget> {
 
     private JLabel nameLabel;
-    private JLabel amountLabel;
-    private JTextArea descriptionArea;
+    private JLabel descriptionLabel;
 
     public BudgetListRenderer() {
-        setLayout(new BorderLayout(5, 5));
-        nameLabel = new JLabel();
-        amountLabel = new JLabel();
-        descriptionArea = new JTextArea();
-        descriptionArea.setWrapStyleWord(true);
-        descriptionArea.setLineWrap(true);
-        descriptionArea.setOpaque(false);
-        descriptionArea.setEditable(false);
+        setLayout(new BorderLayout(10, 10));
+        setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1));
+        setBackground(Color.WHITE);
 
-        JPanel topPanel = new JPanel(new BorderLayout());
-        topPanel.add(nameLabel, BorderLayout.WEST);
-        topPanel.add(amountLabel, BorderLayout.EAST);
-        add(topPanel, BorderLayout.NORTH);
-        add(descriptionArea, BorderLayout.CENTER);
+        // Labels for rendering
+        nameLabel = new JLabel();
+        nameLabel.setFont(new Font("Arial", Font.BOLD, 14));
+
+        descriptionLabel = new JLabel();
+        descriptionLabel.setFont(new Font("Arial", Font.PLAIN, 12));
+        descriptionLabel.setForeground(Color.DARK_GRAY);
+
+        // Left panel for name and description
+        JPanel leftPanel = new JPanel();
+        leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
+        leftPanel.setOpaque(false);
+        leftPanel.add(nameLabel);
+        leftPanel.add(Box.createVerticalStrut(5)); // Spacer
+        leftPanel.add(descriptionLabel);
+
+        add(leftPanel, BorderLayout.CENTER);
     }
 
     @Override
-    public Component getListCellRendererComponent(JList<? extends Budget> list, Budget budget, int index, boolean isSelected, boolean cellHasFocus) {
-        nameLabel.setText(budget.getName());
-        amountLabel.setText(String.format("$%.2f", budget.getAmount()));
-        descriptionArea.setText(budget.getDescription());
+    public Component getListCellRendererComponent(
+            JList<? extends Budget> list,
+            Budget budget,
+            int index,
+            boolean isSelected,
+            boolean cellHasFocus
+    ) {
+        // Set text values
+        nameLabel.setText(budget.getName() != null ? budget.getName() : "Unnamed Budget");
+        descriptionLabel.setText(budget.getDescription() != null ? budget.getDescription() : "No Description");
 
-        setBackground(isSelected ? Color.LIGHT_GRAY : Color.WHITE);
-        setForeground(isSelected ? Color.BLACK : Color.DARK_GRAY);
+        // Highlighting for selection
+        if (isSelected) {
+            setBackground(list.getSelectionBackground());
+            setForeground(list.getSelectionForeground());
+        } else {
+            setBackground(Color.WHITE);
+            setForeground(Color.BLACK);
+        }
 
         return this;
     }
 }
-
